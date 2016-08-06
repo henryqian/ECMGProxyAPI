@@ -1,0 +1,186 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Irdeto ECMGProxy API for Titan",
+        "description": "Irdeto ECMGProxy API for Titan, with Swagger 2.0",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/ecmgproxy/v1",
+    "produces": [
+        "application/json",
+        "text/plain"
+    ],
+    "paths": {
+        "/Version": {
+            "get": {
+                "summary": "The product version",
+                "tags": [
+                    "Version"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The version info for ECMGProxy",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Version"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Status": {
+            "get": {
+                "summary": "The product status",
+                "tags": [
+                    "Status"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The status for ECMGProxy",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Status"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/SCSConnection/{id}": {
+            "post": {
+                "summary": "Create a new SCSConnection object",
+                "description": "This will create a new SCSConnection object.\n",
+                "tags": [
+                    "SCSConnection"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/SCSConnection"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This returns a SCSConnection object in JSON form.",
+                        "schema": {
+                            "$ref": "#/definitions/SCSConnection"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "When authentication or authorization failed.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "SCSConnection": {
+            "properties": {
+                "ECMIBorOOB": {
+                    "type": "string"
+                },
+                "NetworkID": {
+                    "type": "string"
+                },
+                "TransportID": {
+                    "type": "string"
+                },
+                "ECMGPort": {
+                    "type": "string"
+                },
+                "SCSHost": {
+                    "type": "string"
+                },
+                "CASystemID": {
+                    "type": "integer"
+                },
+                "RepetitionRate": {
+                    "type": "integer"
+                },
+                "DelayStart": {
+                    "type": "integer"
+                },
+                "DelayStop": {
+                    "type": "integer"
+                },
+                "CWsInAdvance": {
+                    "type": "integer"
+                },
+                "CWsPerMessage": {
+                    "type": "integer"
+                },
+                "TransportStreamPacketization": {
+                    "type": "integer"
+                },
+                "MinCPDuration": {
+                    "type": "integer"
+                },
+                "MaxCompTime": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Version": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "Status": {
+            "properties": {
+                "NumofChannels": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
